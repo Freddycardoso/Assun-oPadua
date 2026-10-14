@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+@theme {
+  --color-offwhite: #FAF9F6;
+  --color-surface: #FFFFFF;
+  --color-grafite-900: #222629;
+  --color-grafite-600: #586166;
+  --color-brand-green: #2B5248;
+  --color-brand-green-hover: #1F3F37;
+  --color-brand-navy: #183C4A;
+  --color-brand-wood: #8F6238;
+  --color-line: #E6E5E0;
+
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+@layer base {
+  html {
+    scroll-padding-top: 5rem;
+    color-scheme: light;
+  }
+
+  body {
+    background-color: var(--color-offwhite);
+    color: var(--color-grafite-900);
+    font-family: var(--font-sans);
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.625;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Impeccable: Browser surfaces styled to match brand */
+  ::selection {
+    background-color: var(--color-brand-green);
+    color: #ffffff;
+  }
+
+  /* Emil Kowalski: Specific transitions, no 'transition: all', active push feedback */
+  a,
+  button,
+  summary {
+    transition-property: color, background-color, border-color, transform, box-shadow, opacity;
+    transition-duration: 180ms;
+    transition-timing-function: var(--ease-out);
+  }
+
+  a:active,
+  button:active {
+    transform: scale(0.975);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-green);
+    outline-offset: 3px;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* Custom subtle scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-offwhite);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #d5d3cb;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b8b5aa;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

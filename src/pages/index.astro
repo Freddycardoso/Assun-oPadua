@@ -1,0 +1,924 @@
+---
+import { Image, getImage } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import { waLink } from '../lib/whatsapp';
+
+import heroImg from '../assets/images/hero-socios-julio-e-mirian.webp';
+import julioImg from '../assets/images/autoridade-dr-julio-cesar.webp';
+import mirianImg from '../assets/images/autoridade-dra-mirian-assuncao.webp';
+import fachadaImg from '../assets/images/fachada-clinica-assuncao-padua.webp';
+import recepcaoImg from '../assets/images/recepcao-clinica-monograma-ap.webp';
+import equipeImg from '../assets/images/equipe-socios-jaleco-preto.webp';
+
+const pageTitle = 'Assunção e Pádua Odontologia em Passos-MG | Dentistas';
+const pageDescription =
+  'Clínica odontológica no Centro de Passos-MG. Reabilitação oral, ortodontia e odontopediatria com Dr. Júlio César e Dra. Mirian Assunção. Agende no WhatsApp.';
+
+// Hero: dimensões generosas e preload da mesma variante WebP otimizada usada no <Image>
+const HERO_W = 560;
+const HERO_H = Math.round((HERO_W * heroImg.height) / heroImg.width);
+const heroOptimized = await getImage({ src: heroImg, width: HERO_W, height: HERO_H, format: 'webp', quality: 90 });
+
+const wa = {
+  hero: 'Olá! Gostaria de agendar uma consulta na Assunção e Pádua Odontologia.',
+  final: 'Olá! Gostaria de consultar os horários disponíveis para atendimento na clínica Assunção e Pádua.',
+};
+
+const dores = [
+  {
+    num: '01',
+    title: 'Dificuldade para mastigar e insegurança ao sorrir',
+    text: 'Adiar a reposição ou o tratamento de dentes desgastados prejudica a digestão, compromete a articulação e reduz a confiança no dia a dia. Você merece uma reabilitação precisa e funcional.',
+  },
+  {
+    num: '02',
+    title: 'Troca constante de dentistas em franquias',
+    text: 'Iniciar um procedimento e ser atendido por um profissional diferente a cada visita quebra a continuidade do cuidado. Na Assunção e Pádua, você é acompanhado do início ao fim pelo mesmo especialista.',
+  },
+  {
+    num: '03',
+    title: 'Ansiedade e receio de procedimentos invasivos',
+    text: 'Tanto adultos quanto crianças precisam de um ambiente sereno e de profissionais que expliquem cada etapa com clareza técnica, eliminando o estresse da consulta odontológica.',
+  },
+];
+
+const servicos = [
+  {
+    title: 'Reabilitação Oral e Próteses',
+    resumo:
+      'Restabelecimento anatômico e funcional da mastigação através de próteses fixas, próteses sobre implantes e restaurações estéticas de alta precisão.',
+    publico: 'Adultos com perdas parciais ou totais de dentes e desgastes dentários severos.',
+    responsavel: 'Dr. Júlio César de Pádua (RT CRO-MG 62726)',
+    cta: 'Agendar Reabilitação Oral',
+    dataCta: 'servico-reabilitacao',
+    msg: 'Olá, Dr. Júlio! Gostaria de informações sobre Reabilitação Oral na clínica.',
+  },
+  {
+    title: 'Ortodontia e Alinhamento Facial',
+    resumo:
+      'Correção do posicionamento dentário e equilíbrio das bases ósseas com aparelhos fixos e alinhadores modernos para estética e função duradouras.',
+    publico: 'Jovens e adultos que buscam correção oclusal, alinhamento do sorriso e conforto mastigatório.',
+    responsavel: 'Dra. Mirian Assunção (CRO-MG 62766)',
+    cta: 'Agendar Avaliação Ortodôntica',
+    dataCta: 'servico-ortodontia',
+    msg: 'Olá, Dra. Mirian! Gostaria de agendar uma avaliação ortodôntica na clínica.',
+  },
+  {
+    title: 'Odontopediatria e Prevenção Infantil',
+    resumo:
+      'Acompanhamento integral do desenvolvimento bucal desde os primeiros anos de vida, com abordagem acolhedora e foco em prevenção.',
+    publico: 'Bebês, crianças e adolescentes em fase de crescimento e dentição mista.',
+    responsavel: 'Dra. Mirian Assunção (CRO-MG 62766)',
+    cta: 'Agendar Consulta Infantil',
+    dataCta: 'servico-odontopediatria',
+    msg: 'Olá! Gostaria de agendar uma consulta de odontopediatria para meu filho(a).',
+  },
+  {
+    title: 'Implantodontia e Cirurgia Oral',
+    resumo:
+      'Planejamento cirúrgico criterioso para instalação de implantes dentários, recuperando a firmeza mastigatória com estabilidade biológica.',
+    publico: 'Pacientes com ausência de um ou mais dentes que buscam fixação definitiva e segurança.',
+    responsavel: 'Dr. Júlio César de Pádua (RT CRO-MG 62726)',
+    cta: 'Agendar Avaliação de Implante',
+    dataCta: 'servico-implantes',
+    msg: 'Olá, Dr. Júlio! Gostaria de uma avaliação para implantes dentários.',
+  },
+];
+
+const passos = [
+  {
+    num: '01',
+    title: 'Contato Inicial Direto',
+    text: 'Você clica no botão do WhatsApp e nossa equipe organiza o melhor horário para o seu atendimento em Passos.',
+  },
+  {
+    num: '02',
+    title: 'Avaliação Clínica e Diagnóstico',
+    text: 'Na primeira consulta, o especialista responsável realiza exame detalhado da sua saúde bucal, ouvindo suas queixas e necessidades.',
+  },
+  {
+    num: '03',
+    title: 'Planejamento Personalizado',
+    text: 'Apresentamos o plano de tratamento com clareza: opções viáveis, tempo estimado e todas as etapas explicadas sem termos inacessíveis.',
+  },
+  {
+    num: '04',
+    title: 'Execução e Acompanhamento Contínuo',
+    text: 'Seu tratamento é realizado com pontualidade e seguido de consultas de revisão para assegurar longevidade e saúde aos resultados.',
+  },
+];
+
+const faq = [
+  {
+    q: 'Onde fica localizada a clínica Assunção e Pádua em Passos-MG?',
+    a: 'Estamos localizados no Centro de Passos, na Rua Dr. Manoel Patti, 55. O consultório conta com acessibilidade e ambiente climatizado para receber toda a família.',
+    ld: 'Estamos localizados no Centro de Passos, na Rua Dr. Manoel Patti, 55, com estrutura acessível e climatizada para atender toda a família.',
+  },
+  {
+    q: 'Como funciona o agendamento de consultas na clínica?',
+    a: 'Os atendimentos são realizados com horário previamente reservado para garantir atenção individualizada. O agendamento é feito diretamente pelo nosso WhatsApp oficial: (35) 98801-1788.',
+    ld: 'Os atendimentos são realizados com horário previamente agendado pelo WhatsApp oficial (35) 98801-1788 para assegurar pontualidade e atenção personalizada.',
+  },
+  {
+    q: 'Quais especialidades odontológicas são atendidas no local?',
+    a: 'Atendemos Reabilitação Oral, Implantes Dentários, Próteses, Ortodontia para crianças e adultos, e Odontopediatria, sob responsabilidade direta do Dr. Júlio César e da Dra. Mirian.',
+    ld: 'Atendemos Reabilitação Oral, Próteses, Implantes Dentários, Ortodontia e Odontopediatria com os especialistas fundadores.',
+  },
+  {
+    q: 'A clínica atende crianças de todas as idades?',
+    a: 'Sim. A Dra. Mirian Assunção atua com odontopediatria preventiva e curativa desde a primeira infância, com consultório e abordagem adaptados para o conforto dos pequenos.',
+    ld: 'Sim. A Dra. Mirian Assunção realiza acompanhamento odontopediátrico preventivo e curativo desde a primeira infância.',
+  },
+];
+
+const DOMINIO = 'https://assuncaoepadua.com.br';
+const schemaData = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Dentist',
+      '@id': `${DOMINIO}/#clinic`,
+      name: 'Assunção e Pádua Odontologia',
+      image: `${DOMINIO}/fachada-assuncao-padua.jpg`,
+      telephone: '+55-35-98801-1788',
+      url: DOMINIO,
+      sameAs: ['https://www.instagram.com/assuncaoepadua/'],
+      hasMap: 'https://www.google.com/maps/dir/?api=1&destination=Rua+Dr.+Manoel+Patti,+55,+Passos+-+MG,+37900-053',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Rua Dr. Manoel Patti, 55',
+        addressLocality: 'Passos',
+        addressRegion: 'MG',
+        postalCode: '37900-053',
+        addressCountry: 'BR',
+      },
+      geo: { '@type': 'GeoCoordinates', latitude: -20.7188, longitude: -46.6095 },
+      openingHoursSpecification: [
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+          opens: '08:00',
+          closes: '18:00',
+        },
+      ],
+      employee: [
+        {
+          '@type': 'Person',
+          name: 'Dr. Júlio César de Pádua',
+          jobTitle: 'Cirurgião-Dentista, Reabilitação Oral',
+          identifier: 'CRO-MG 62726',
+        },
+        {
+          '@type': 'Person',
+          name: 'Dra. Mirian Assunção',
+          jobTitle: 'Cirurgiã-Dentista, Ortodontista e Odontopediatra',
+          identifier: 'CRO-MG 62766',
+        },
+      ],
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${DOMINIO}/#faq`,
+      mainEntity: faq.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.ld },
+      })),
+    },
+  ],
+});
+
+const btnPrimary =
+  'inline-flex items-center justify-center min-h-[50px] min-w-[44px] rounded-xl bg-brand-green px-7 py-3.5 text-base font-semibold text-white hover:bg-brand-green-hover active:scale-[0.975] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-green shadow-sm';
+const btnGhost =
+  'inline-flex items-center justify-center min-h-[50px] min-w-[44px] rounded-xl border border-line bg-surface px-7 py-3.5 text-base font-semibold text-grafite-900 hover:border-grafite-900/40 hover:bg-offwhite active:scale-[0.975] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-green';
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={DOMINIO}
+  schema={schemaData}
+  ogTitle="Assunção e Pádua Odontologia em Passos-MG"
+  ogDescription="Reabilitação oral, ortodontia e odontopediatria com atendimento dos especialistas proprietários no Centro de Passos."
+  preloadImage={{ src: heroOptimized.src }}
+>
+  <!-- HEADER -->
+  <header class="border-b border-line bg-surface/90 backdrop-blur-md sticky top-0 z-40">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4.5 sm:px-8">
+      <a href="#" class="text-xl font-semibold tracking-tight text-grafite-900 flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-grafite-900 text-white text-xs font-bold tracking-widest">AP</span>
+        <span>Assunção <span class="text-brand-green font-normal">e</span> Pádua</span>
+        <span class="hidden font-normal text-grafite-600 sm:inline text-base">· Odontologia</span>
+      </a>
+
+      <!-- Desktop Navigation Anchors -->
+      <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-grafite-600" aria-label="Navegação principal">
+        <a href="#especialidades" class="hover:text-brand-green transition-colors">Especialidades</a>
+        <a href="#estrutura" class="hover:text-brand-green transition-colors">Estrutura</a>
+        <a href="#profissionais" class="hover:text-brand-green transition-colors">Profissionais</a>
+        <a href="#localizacao" class="hover:text-brand-green transition-colors">Localização</a>
+        <a href="#duvidas" class="hover:text-brand-green transition-colors">Dúvidas</a>
+      </nav>
+
+      <a
+        href={waLink(wa.hero)}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-cta="hero-whatsapp"
+        class="hidden md:inline-flex min-h-[44px] items-center rounded-xl bg-brand-green px-6 text-sm font-semibold text-white hover:bg-brand-green-hover active:scale-[0.975] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-green shadow-sm"
+      >
+        Agendar Consulta
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. HERO -->
+    <section class="bg-offwhite border-b border-line">
+      <div class="mx-auto grid max-w-7xl items-center gap-12 px-6 py-16 sm:px-8 md:py-24 lg:grid-cols-[1.12fr_0.88fr] lg:gap-16">
+        <div>
+          <h1 class="text-3xl font-semibold tracking-[-0.025em] text-grafite-900 sm:text-4xl lg:text-[46px] leading-[1.18]">
+            Cuidado odontológico completo e integrado para você e sua família no Centro de Passos.
+          </h1>
+          <h2 class="mt-6 max-w-[58ch] text-lg sm:text-[19px] font-normal text-grafite-600 leading-relaxed">
+            Da prevenção infantil e ortodontia à reabilitação oral e implantes com planejamento minucioso, acompanhado diretamente pelos responsáveis técnicos.
+          </h2>
+
+          <div class="mt-10 flex flex-col gap-3.5 sm:flex-row">
+            <a
+              href={waLink(wa.hero)}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cta="hero-whatsapp"
+              class={btnPrimary}
+            >
+              Agendar consulta no WhatsApp
+            </a>
+            <a href="#especialidades" class={btnGhost}>Conhecer especialidades</a>
+          </div>
+
+          <ul class="mt-12 space-y-3.5 border-t border-line pt-8 text-base text-grafite-600">
+            <li class="flex items-center gap-3">
+              <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-green/10 text-brand-green font-bold text-xs" aria-hidden="true">✓</span>
+              Atendimento com os especialistas fundadores
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-green/10 text-brand-green font-bold text-xs" aria-hidden="true">✓</span>
+              Instalações modernas na Rua Dr. Manoel Patti, Centro
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-green/10 text-brand-green font-bold text-xs" aria-hidden="true">✓</span>
+              Planejamento individualizado e sem rotatividade clínica
+            </li>
+          </ul>
+        </div>
+
+        <!-- HERO PORTRAIT (Editorial Master Framing) -->
+        <figure class="mx-auto w-full max-w-[500px]">
+          <div class="overflow-hidden rounded-2xl border border-line bg-surface shadow-sm">
+            <Image
+              src={heroImg}
+              width={HERO_W}
+              height={HERO_H}
+              format="webp"
+              quality={90}
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+              sizes="(min-width: 1024px) 500px, 92vw"
+              alt="Dr. Júlio César de Pádua e Dra. Mirian Assunção, sócios-fundadores da clínica, sorrindo lado a lado"
+              class="h-auto w-full object-cover"
+            />
+          </div>
+          <figcaption class="pt-3.5 flex items-center justify-between text-xs font-semibold tracking-wider uppercase text-grafite-600">
+            <span class="text-grafite-900">Dr. Júlio César de Pádua</span>
+            <span class="text-brand-green">·</span>
+            <span class="text-grafite-900">Dra. Mirian Assunção</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 2. DORES (Architectural Editorial Cadence - No Generic Cards) -->
+    <section class="border-b border-line bg-surface">
+      <div class="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:py-28">
+        <div class="max-w-3xl">
+          <h2 class="text-3xl font-semibold tracking-tight text-grafite-900 sm:text-4xl leading-tight">
+            A experiência odontológica que sua saúde realmente merece
+          </h2>
+          <p class="mt-4 text-lg text-grafite-600 leading-relaxed max-w-[62ch]">
+            Tratamentos conduzidos com transparência clínica, conforto e previsibilidade.
+          </p>
+        </div>
+
+        <div class="mt-16 grid gap-10 md:grid-cols-3 md:gap-0 border-y border-line md:divide-x md:divide-line">
+          {
+            dores.map((d) => (
+              <article class="flex flex-col justify-between py-10 md:py-12 md:px-8 first:md:pl-0 last:md:pr-0">
+                <div>
+                  <span class="text-xs font-semibold tracking-widest text-brand-green uppercase" aria-hidden="true">
+                    {d.num}
+                  </span>
+                  <h3 class="mt-3 text-xl sm:text-[22px] font-semibold leading-snug text-grafite-900">
+                    {d.title}
+                  </h3>
+                  <p class="mt-4 text-base text-grafite-600 leading-relaxed">
+                    {d.text}
+                  </p>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. SERVIÇOS (Architectural Discipline Catalogue - Flat Minimalist) -->
+    <section id="especialidades" class="bg-offwhite border-b border-line">
+      <div class="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:py-28">
+        <div class="max-w-3xl">
+          <h2 class="text-3xl font-semibold tracking-tight text-grafite-900 sm:text-4xl leading-tight">
+            Áreas de Atuação e Especialidades
+          </h2>
+          <p class="mt-4 text-lg text-grafite-600 leading-relaxed">
+            Diagnóstico e condutas clínicas integradas em Passos-MG.
+          </p>
+        </div>
+
+        <div class="mt-16 grid gap-x-12 gap-y-14 md:grid-cols-2">
+          {
+            servicos.map((s) => (
+              <article class="flex flex-col justify-between border-t-2 border-line pt-8">
+                <div>
+                  <h3 class="text-2xl font-semibold text-grafite-900 tracking-tight">{s.title}</h3>
+                  <p class="mt-3 text-base text-grafite-600 leading-relaxed">{s.resumo}</p>
+
+                  <dl class="mt-6 space-y-3 text-sm">
+                    <div>
+                      <dt class="text-xs uppercase font-semibold tracking-wider text-grafite-900/60">Para quem é</dt>
+                      <dd class="mt-1 text-grafite-600 leading-relaxed">{s.publico}</dd>
+                    </div>
+                    <div>
+                      <dt class="text-xs uppercase font-semibold tracking-wider text-grafite-900/60">Responsável Técnico</dt>
+                      <dd class="mt-1 text-grafite-900 font-semibold">{s.responsavel}</dd>
+                    </div>
+                  </dl>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-line/60">
+                  <a
+                    href={waLink(s.msg)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-cta={s.dataCta}
+                    class="inline-flex items-center gap-2 text-sm font-semibold text-brand-green hover:underline group"
+                  >
+                    <span>{s.cta}</span>
+                    <span class="text-brand-green font-bold group-hover:translate-x-1 transition-transform" aria-hidden="true">→</span>
+                  </a>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. COMO FUNCIONA E ESTRUTURA -->
+    <section id="estrutura" class="border-b border-line bg-surface">
+      <div class="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:py-28">
+        <!-- Progressão das etapas de atendimento -->
+        <div class="max-w-3xl">
+          <h2 class="text-3xl font-semibold tracking-tight text-grafite-900 sm:text-4xl leading-tight">
+            Como é o seu atendimento conosco
+          </h2>
+        </div>
+
+        <ol class="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {
+            passos.map((p) => (
+              <li class="border-t-2 border-line pt-6">
+                <span class="text-xs font-semibold tracking-widest text-brand-green uppercase">
+                  Passo {p.num}
+                </span>
+                <h3 class="mt-2 text-xl font-semibold leading-snug text-grafite-900">{p.title}</h3>
+                <p class="mt-3 text-base text-grafite-600 leading-relaxed">{p.text}</p>
+              </li>
+            ))
+          }
+        </ol>
+
+        <!-- ESTRUTURA DA CLÍNICA: VITRINE ARQUITETÔNICA COM AS DUAS IMAGENS -->
+        <div class="mt-24 border-t border-line pt-16">
+          <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+            <div>
+              <h3 class="text-2xl sm:text-3xl font-semibold tracking-tight text-grafite-900">
+                Estrutura planejada no Centro de Passos
+              </h3>
+            </div>
+            <p class="text-base sm:text-lg text-grafite-600 max-w-xl leading-relaxed">
+              Fachada moderna na Rua Dr. Manoel Patti, 55, com jardim vertical, acessibilidade completa e recepção acolhedora com conforto térmico e acústico.
+            </p>
+          </div>
+
+          <div class="grid gap-8 md:grid-cols-2 items-start">
+            <!-- Imagem 1: Fachada -->
+            <figure class="group">
+              <div class="overflow-hidden rounded-2xl aspect-[4/3] w-full bg-slate-100 border border-line shadow-sm">
+                <Image
+                  src={fachadaImg}
+                  width={750}
+                  height={560}
+                  format="webp"
+                  quality={90}
+                  loading="lazy"
+                  decoding="async"
+                  sizes="(min-width: 1024px) 600px, (min-width: 768px) 50vw, 92vw"
+                  alt="Fachada cinza-grafite da clínica Assunção e Pádua, com jardim vertical e placa com o monograma AP, na Rua Dr. Manoel Patti"
+                  class="h-full w-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-500"
+                />
+              </div>
+              <figcaption class="mt-3.5 px-1 flex items-center justify-between text-sm">
+                <span class="font-semibold text-grafite-900">Fachada Arquitetônica</span>
+                <span class="text-grafite-600">Rua Dr. Manoel Patti, 55</span>
+              </figcaption>
+            </figure>
+
+            <!-- Imagem 2: Recepção -->
+            <figure class="group">
+              <div class="overflow-hidden rounded-2xl aspect-[4/3] w-full bg-slate-100 border border-line shadow-sm">
+                <Image
+                  src={recepcaoImg}
+                  width={750}
+                  height={560}
+                  format="webp"
+                  quality={90}
+                  loading="lazy"
+                  decoding="async"
+                  sizes="(min-width: 1024px) 600px, (min-width: 768px) 50vw, 92vw"
+                  alt="Recepção da clínica com balcão em madeira natural freijó, monograma AP e poltrona em veludo azul"
+                  class="h-full w-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-500"
+                />
+              </div>
+              <figcaption class="mt-3.5 px-1 flex items-center justify-between text-sm">
+                <span class="font-semibold text-grafite-900">Recepção & Acolhimento</span>
+                <span class="text-grafite-600">Conforto térmico e acústico</span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. AUTORIDADE (Grand Clinical Leadership & Authentic Testimonies - Minimalist) -->
+    <section id="profissionais" class="bg-offwhite border-b border-line">
+      <div class="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:py-28">
+        <div class="max-w-3xl">
+          <h2 class="text-3xl font-semibold tracking-tight text-grafite-900 sm:text-4xl leading-tight">
+            Profissionais dedicados ao cuidado da sua família
+          </h2>
+          <p class="mt-4 text-lg text-grafite-600 leading-relaxed">
+            Atendimento conduzido ponta a ponta pelos fundadores e responsáveis técnicos, garantindo continuidade e rigor clínico.
+          </p>
+        </div>
+
+        <!-- PERFIS DOS FUNDADORES (Layout Alternado Minimalista sem Cards) -->
+        <div class="mt-16 space-y-20 lg:space-y-24">
+          <!-- 1. Dr. Júlio César (Homem: Foto à esquerda, Texto à direita) -->
+          <article class="grid gap-8 md:grid-cols-12 md:gap-12 lg:gap-16 items-center border-t border-line pt-12 first:border-t-0 first:pt-0">
+            <!-- Foto à esquerda -->
+            <div class="md:col-span-5 lg:col-span-5 flex justify-center md:justify-start">
+              <div class="w-full max-w-[340px] sm:max-w-[380px] overflow-hidden rounded-2xl border border-line bg-surface aspect-[3/4] shadow-sm">
+                <Image
+                  src={julioImg}
+                  width={520}
+                  height={693}
+                  format="webp"
+                  quality={92}
+                  loading="lazy"
+                  decoding="async"
+                  sizes="(min-width: 1024px) 380px, (min-width: 768px) 40vw, 90vw"
+                  alt="Dr. Júlio César de Pádua sorrindo, sentado à mesa do consultório"
+                  class="h-full w-full object-cover object-top hover:scale-[1.02] transition-transform duration-500"
+                />
+              </div>
+            </div>
+
+            <!-- Informações à direita -->
+            <div class="md:col-span-7 lg:col-span-7 flex flex-col justify-center">
+              <span class="text-xs font-semibold uppercase tracking-wider text-brand-green">
+                Responsável Técnico — CRO-MG 62726
+              </span>
+              <h3 class="mt-2 text-2xl sm:text-3xl font-semibold text-grafite-900 tracking-tight">
+                Dr. Júlio César de Pádua
+              </h3>
+              <p class="mt-1 text-base font-medium text-grafite-600">
+                Especialista em Reabilitação Oral, Implantes e Próteses
+              </p>
+
+              <p class="mt-5 text-base sm:text-lg text-grafite-600 leading-relaxed max-w-[54ch]">
+                Dedica sua atuação clínica ao restabelecimento mastigatório, implantes e próteses, priorizando precisão cirúrgica, estabilidade oclusal e bem-estar funcional do paciente adulto.
+              </p>
+
+              <div class="mt-8 space-y-3 text-sm sm:text-base text-grafite-600 border-t border-line/70 pt-6">
+                <div class="flex items-center gap-3">
+                  <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-green/10 text-brand-green font-bold text-xs" aria-hidden="true">✓</span>
+                  <span>Acompanhamento clínico individualizado do início ao fim</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-green/10 text-brand-green font-bold text-xs" aria-hidden="true">✓</span>
+                  <span>Planejamento minucioso para próteses fixas e sobre implantes</span>
+                </div>
+              </div>
+
+              <div class="mt-8">
+                <a
+                  href={waLink('Olá, Dr. Júlio! Gostaria de agendar uma consulta de avaliação.')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex min-h-[46px] items-center gap-2 rounded-xl bg-brand-green px-6 py-2.5 text-sm font-semibold text-white hover:bg-brand-green-hover active:scale-[0.975] transition-all shadow-sm"
+                >
+                  <span>Agendar com Dr. Júlio no WhatsApp</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 2. Dra. Mirian Assunção (Mulher: Informações à esquerda, Foto à direita) -->
+          <article class="grid gap-8 md:grid-cols-12 md:gap-12 lg:gap-16 items-center border-t border-line pt-12">
+            <!-- Informações à esquerda -->
+            <div class="md:col-span-7 lg:col-span-7 flex flex-col justify-center order-2 md:order-1">
+              <span class="text-xs font-semibold uppercase tracking-wider text-brand-green">
+                Cirurgiã-Dentista — CRO-MG 62766
+              </span>
+              <h3 class="mt-2 text-2xl sm:text-3xl font-semibold text-grafite-900 tracking-tight">
+                Dra. Mirian Assunção
+              </h3>
+              <p class="mt-1 text-base font-medium text-grafite-600">
+                Ortodontista e Odontopediatra
+              </p>
+
+              <p class="mt-5 text-base sm:text-lg text-grafite-600 leading-relaxed max-w-[54ch]">
+                Especializada em guiar o desenvolvimento dentofacial desde a infância até o alinhamento definitivo de sorrisos em jovens e adultos, unindo rigor biomecânico e conduta acolhedora.
+              </p>
+
+              <div class="mt-8 space-y-3 text-sm sm:text-base text-grafite-600 border-t border-line/70 pt-6">
+                <div class="flex items-center gap-3">
+                  <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-green/10 text-brand-green font-bold text-xs" aria-hidden="true">✓</span>
+                  <span>Odontopediatria preventiva com abordagem lúdica e tranquila</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-green/10 text-brand-green font-bold text-xs" aria-hidden="true">✓</span>
+                  <span>Ortodontia estética e funcional para crianças, adolescentes e adultos</span>
+                </div>
+              </div>
+
+              <div class="mt-8">
+                <a
+                  href={waLink('Olá, Dra. Mirian! Gostaria de agendar uma avaliação ortodôntica ou infantil.')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex min-h-[46px] items-center gap-2 rounded-xl bg-brand-green px-6 py-2.5 text-sm font-semibold text-white hover:bg-brand-green-hover active:scale-[0.975] transition-all shadow-sm"
+                >
+                  <span>Agendar com Dra. Mirian no WhatsApp</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Foto à direita -->
+            <div class="md:col-span-5 lg:col-span-5 flex justify-center md:justify-end order-1 md:order-2">
+              <div class="w-full max-w-[340px] sm:max-w-[380px] overflow-hidden rounded-2xl border border-line bg-surface aspect-[3/4] shadow-sm">
+                <Image
+                  src={mirianImg}
+                  width={520}
+                  height={693}
+                  format="webp"
+                  quality={92}
+                  loading="lazy"
+                  decoding="async"
+                  sizes="(min-width: 1024px) 380px, (min-width: 768px) 40vw, 90vw"
+                  alt="Dra. Mirian Assunção sorrindo, sentada à mesa do consultório"
+                  class="h-full w-full object-cover object-top hover:scale-[1.02] transition-transform duration-500"
+                />
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- MANIFESTO DOS SÓCIOS (Minimalista, sem container de card) -->
+        <div class="mt-24 border-t border-line pt-16 flex flex-col md:flex-row items-center gap-8 md:gap-14">
+          <div class="w-full sm:w-56 md:w-64 shrink-0 overflow-hidden rounded-2xl aspect-[3/4] border border-line bg-surface shadow-sm">
+            <Image
+              src={equipeImg}
+              width={480}
+              height={640}
+              format="webp"
+              quality={92}
+              loading="lazy"
+              decoding="async"
+              sizes="(min-width: 640px) 256px, 92vw"
+              alt="Dr. Júlio César de Pádua e Dra. Mirian Assunção em jaleco preto profissional"
+              class="h-full w-full object-cover object-top hover:scale-[1.02] transition-transform duration-500"
+            />
+          </div>
+          <div class="flex-1">
+            <span class="text-xs font-semibold uppercase tracking-widest text-brand-green">
+              Compromisso com a Continuidade
+            </span>
+            <h3 class="mt-3 text-2xl sm:text-3xl font-semibold text-grafite-900 tracking-tight leading-snug">
+              Tratamento iniciado e finalizado pelos mesmos especialistas
+            </h3>
+            <p class="mt-4 text-base sm:text-lg text-grafite-600 leading-relaxed max-w-[62ch]">
+              Ao contrário do modelo de franquias que trocam constantemente de profissional ao longo do tratamento, na Assunção e Pádua você tem a garantia de ser acompanhado do diagnóstico à alta pelos proprietários técnicos da clínica, com atenção dedicada e sem pressa.
+            </p>
+          </div>
+        </div>
+
+        <!-- SELO GOOGLE E DEPOIMENTOS (Minimalista sem caixas) -->
+        <div class="mt-24 border-t border-line pt-16">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <div class="flex items-center gap-3">
+                <span class="text-3xl font-bold text-grafite-900 tracking-tight">Nota 5.0</span>
+                <div class="flex text-amber-500 text-xl" aria-hidden="true">★★★★★</div>
+                <span class="text-base font-semibold text-grafite-600">no Google</span>
+              </div>
+              <p class="mt-2 text-base text-grafite-600">
+                Avaliação máxima baseada nas experiências espontâneas e verificadas de pacientes atendidos em Passos-MG.
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-12 grid gap-10 md:grid-cols-2 md:gap-14 border-t border-line pt-10">
+            <blockquote class="relative">
+              <span class="text-5xl font-serif text-brand-green/25 leading-none select-none block -mb-2" aria-hidden="true">“</span>
+              <p class="text-base sm:text-lg text-grafite-900 leading-relaxed">
+                Atendimento impecável desde a recepção até a consulta. O Dr. Júlio explicou todo o processo do meu tratamento com muita clareza e segurança. Estrutura excelente e acolhedora no Centro de Passos.
+              </p>
+              <footer class="mt-4 text-sm font-semibold text-brand-green">
+                — Paciente de Reabilitação Oral, Passos-MG
+              </footer>
+            </blockquote>
+
+            <blockquote class="relative">
+              <span class="text-5xl font-serif text-brand-green/25 leading-none select-none block -mb-2" aria-hidden="true">“</span>
+              <p class="text-base sm:text-lg text-grafite-900 leading-relaxed">
+                A Dra. Mirian tem um cuidado e uma paciência indescritíveis com as crianças. Minha filha se sentiu completamente segura e à vontade no consultório. Recomendo de olhos fechados.
+              </p>
+              <footer class="mt-4 text-sm font-semibold text-brand-green">
+                — Mãe de paciente atendida, Passos-MG
+              </footer>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. ONDE NOS ENCONTRAR / LOCALIZAÇÃO -->
+    <section id="localizacao" class="border-b border-line bg-surface">
+      <div class="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:py-28">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14">
+          <div class="max-w-2xl">
+            <h2 class="text-3xl font-semibold tracking-tight text-grafite-900 sm:text-4xl leading-tight">
+              Onde nos encontrar no Centro de Passos
+            </h2>
+            <p class="mt-4 text-lg text-grafite-600 leading-relaxed max-w-[58ch]">
+              Localização privilegiada e acessível na Rua Dr. Manoel Patti, 55, projetada com instalações térreas, ambiente climatizado e conforto para receber toda a família.
+            </p>
+          </div>
+          <div class="flex flex-wrap items-center gap-3">
+            <a
+              href="https://www.google.com/maps/dir/?api=1&destination=Rua+Dr.+Manoel+Patti,+55,+Passos+-+MG,+37900-053"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex min-h-[46px] items-center gap-2 rounded-xl bg-brand-green px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-green-hover active:scale-[0.975] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-green transition-all shadow-sm"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+              <span>Traçar Rota no Google Maps</span>
+            </a>
+            <a
+              href="https://waze.com/ul?q=Rua+Dr.+Manoel+Patti+55+Passos+MG"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex min-h-[46px] items-center gap-2 rounded-xl border border-line bg-offwhite px-5 py-2.5 text-sm font-semibold text-grafite-900 hover:border-grafite-900/40 hover:bg-surface active:scale-[0.975] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-green transition-all"
+            >
+              <span>Abrir no Waze</span>
+              <span aria-hidden="true" class="text-xs">↗</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="grid gap-12 lg:grid-cols-12 items-stretch">
+          <!-- Coluna Informações (5 cols - Minimalista sem card) -->
+          <div class="lg:col-span-5 flex flex-col justify-between py-2">
+            <div class="space-y-8">
+              <!-- Endereço -->
+              <div>
+                <span class="text-xs font-semibold uppercase tracking-wider text-brand-green">Endereço Presencial</span>
+                <h3 class="mt-2 text-xl font-semibold text-grafite-900">
+                  Rua Dr. Manoel Patti, 55
+                </h3>
+                <p class="mt-1 text-base text-grafite-600">
+                  Centro — Passos, MG<br />
+                  CEP 37900-053
+                </p>
+                <p class="mt-3 text-sm text-grafite-600/90 leading-relaxed border-t border-line/70 pt-3">
+                  Instalações térreas com acessibilidade facilitada, ambiente totalmente climatizado e áreas de embarque e desembarque próximas.
+                </p>
+              </div>
+
+              <!-- Horários -->
+              <div class="border-t border-line/70 pt-6">
+                <span class="text-xs font-semibold uppercase tracking-wider text-brand-green">Horário de Atendimento</span>
+                <p class="mt-2 text-base font-semibold text-grafite-900">
+                  Segunda a Sexta-feira: 08h às 18h
+                </p>
+                <p class="mt-1 text-sm text-grafite-600 leading-relaxed">
+                  Consultas realizadas exclusivamente com agendamento prévio para assegurar pontualidade e dedicação total.
+                </p>
+              </div>
+
+              <!-- Canais Diretos -->
+              <div class="border-t border-line/70 pt-6">
+                <span class="text-xs font-semibold uppercase tracking-wider text-brand-green">Comunicação e Redes</span>
+                <div class="mt-3 space-y-2.5 text-base">
+                  <div class="flex items-center justify-between">
+                    <span class="text-grafite-600">WhatsApp:</span>
+                    <a
+                      href={waLink(wa.hero)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="font-semibold text-brand-green hover:underline focus-visible:ring-2 focus-visible:ring-brand-green"
+                    >
+                      (35) 98801-1788
+                    </a>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-grafite-600">Instagram:</span>
+                    <a
+                      href="https://www.instagram.com/assuncaoepadua/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="font-semibold text-brand-green hover:underline focus-visible:ring-2 focus-visible:ring-brand-green"
+                    >
+                      @assuncaoepadua
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-line/70">
+              <a
+                href={waLink(wa.hero)}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex w-full min-h-[48px] items-center justify-center rounded-xl bg-grafite-900 px-6 py-3 text-sm font-semibold text-white hover:bg-grafite-800 active:scale-[0.98] transition-all shadow-sm"
+              >
+                Agendar Horário na Clínica
+              </a>
+            </div>
+          </div>
+
+          <!-- Coluna Mapa Interativo (7 cols) -->
+          <div class="lg:col-span-7 flex flex-col">
+            <div class="relative w-full h-full min-h-[380px] sm:min-h-[460px] overflow-hidden rounded-2xl border border-line bg-slate-100 shadow-sm">
+              <iframe
+                title="Mapa de localização da Clínica Assunção e Pádua em Passos-MG"
+                src="https://maps.google.com/maps?q=Rua+Dr.+Manoel+Patti,+55,+Centro,+Passos+-+MG,+37900-053&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                class="absolute inset-0 h-full w-full border-0"
+                loading="lazy"
+                allowfullscreen=""
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+            <div class="mt-3 px-1 flex items-center justify-between text-xs text-grafite-600">
+              <span>Rua Dr. Manoel Patti, 55 — Centro, Passos/MG</span>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Rua+Dr.+Manoel+Patti,+55,+Centro,+Passos+-+MG,+37900-053"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-semibold text-brand-green hover:underline"
+              >
+                Expandir mapa no Google ↗
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. FAQ (Refined Hairline Accordion) -->
+    <section id="duvidas" class="border-b border-line bg-surface">
+      <div class="mx-auto max-w-4xl px-6 py-20 sm:px-8 lg:py-28">
+        <h2 class="text-3xl font-semibold tracking-tight text-grafite-900 sm:text-4xl leading-tight">
+          Dúvidas frequentes sobre o atendimento em Passos
+        </h2>
+
+        <div class="mt-12 border-t border-line">
+          {
+            faq.map((f) => (
+              <details class="group border-b border-line">
+                <summary class="flex min-h-[56px] cursor-pointer list-none items-center justify-between gap-6 py-6 text-lg sm:text-xl font-semibold text-grafite-900 hover:text-brand-green focus-visible:ring-2 focus-visible:ring-brand-green">
+                  <span>{f.q}</span>
+                  <span class="w-8 h-8 rounded-full border border-line flex items-center justify-center shrink-0 text-brand-green group-open:bg-brand-green group-open:text-white group-open:border-brand-green transition-all" aria-hidden="true">
+                    <span class="group-open:hidden text-lg font-normal">+</span>
+                    <span class="hidden group-open:inline text-lg font-normal">−</span>
+                  </span>
+                </summary>
+                <p class="pb-7 text-base sm:text-lg text-grafite-600 leading-relaxed max-w-[65ch]">{f.a}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. CTA FINAL (Architectural Closing Pavilion) -->
+    <section class="bg-offwhite border-b border-line">
+      <div class="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:py-28">
+        <div class="rounded-3xl bg-grafite-900 px-8 py-14 text-white sm:px-14 sm:py-16 lg:px-20 lg:py-20 shadow-xl border border-white/10 relative overflow-hidden">
+          <div class="relative z-10 max-w-2xl">
+            <h2 class="text-3xl font-semibold tracking-tight sm:text-4xl lg:text-[42px] leading-tight">
+              Agende seu horário com a nossa equipe em Passos
+            </h2>
+            <p class="mt-6 text-lg text-[#D1D5D8] leading-relaxed max-w-[54ch]">
+              Converse diretamente com nossa recepção para escolher o melhor momento para sua avaliação com o Dr. Júlio César ou a Dra. Mirian.
+            </p>
+            <a
+              href={waLink(wa.final)}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cta="cta-final-whatsapp"
+              class="mt-10 inline-flex min-h-[52px] items-center justify-center rounded-xl bg-white px-8 py-4 text-base font-semibold text-grafite-900 hover:bg-offwhite active:scale-[0.975] focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-grafite-900 shadow-md transition-all"
+            >
+              Falar no WhatsApp com a Recepção
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 9. RODAPÉ -->
+  <footer class="bg-surface pb-24 md:pb-0">
+    <div class="mx-auto max-w-7xl px-6 py-16 sm:px-8">
+      <div class="grid gap-10 text-base text-grafite-600 sm:grid-cols-2 lg:grid-cols-4">
+        <div>
+          <p class="font-semibold text-grafite-900">Assunção e Pádua Odontologia Ltda</p>
+          <p class="mt-3">CNPJ: 45.641.094/0001-16</p>
+        </div>
+        <div>
+          <p class="font-semibold text-grafite-900">Endereço</p>
+          <address class="mt-3 not-italic leading-relaxed">
+            Rua Dr. Manoel Patti, 55 - Centro,<br />Passos - MG, CEP 37900-053
+          </address>
+          <p class="mt-3">
+            <a
+              href="https://www.google.com/maps/dir/?api=1&destination=Rua+Dr.+Manoel+Patti,+55,+Passos+-+MG,+37900-053"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 text-brand-green font-medium hover:underline focus-visible:ring-2 focus-visible:ring-brand-green"
+            >
+              <span>Traçar rota no Google Maps</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </p>
+        </div>
+        <div>
+          <p class="font-semibold text-grafite-900">Contato</p>
+          <p class="mt-3">
+            WhatsApp:
+            <a href={waLink(wa.hero)} target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[44px] items-center font-semibold text-brand-green underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-brand-green">(35) 98801-1788</a>
+          </p>
+          <p class="mt-1">Horário: Segunda a Sexta, das 08h às 18h</p>
+          <p class="mt-3">
+            Instagram:
+            <a
+              href="https://www.instagram.com/assuncaoepadua/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex min-h-[44px] items-center font-semibold text-brand-green underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-brand-green"
+            >
+              @assuncaoepadua
+            </a>
+          </p>
+        </div>
+        <div>
+          <p class="font-semibold text-grafite-900">Registros profissionais</p>
+          <p class="mt-3">Dr. Júlio César de Pádua — RT CRO-MG 62726</p>
+          <p>Dra. Mirian Assunção — CRO-MG 62766</p>
+        </div>
+      </div>
+      <p class="mt-14 border-t border-line pt-8 text-sm text-grafite-600 leading-relaxed">
+        Os tratamentos e procedimentos odontológicos são definidos exclusivamente após exame clínico presencial individualizado, em conformidade com as normas do Conselho Federal de Odontologia (CFO).
+      </p>
+    </div>
+  </footer>
+
+  <WhatsAppButton href={waLink(wa.hero)} />
+</BaseLayout>

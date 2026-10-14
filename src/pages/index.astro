@@ -10,6 +10,7 @@ import mirianImg from '../assets/images/autoridade-dra-mirian-assuncao.webp';
 import fachadaImg from '../assets/images/fachada-clinica-assuncao-padua.webp';
 import recepcaoImg from '../assets/images/recepcao-clinica-monograma-ap.webp';
 import equipeImg from '../assets/images/equipe-socios-jaleco-preto.webp';
+import logoPretoImg from '../assets/images/logo-ap-preto.webp';
 
 const pageTitle = 'Assunção e Pádua Odontologia em Passos-MG | Dentistas';
 const pageDescription =
@@ -207,10 +208,21 @@ const btnGhost =
   <!-- HEADER -->
   <header class="border-b border-line bg-surface/90 backdrop-blur-md sticky top-0 z-40">
     <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4.5 sm:px-8">
-      <a href="#" class="text-xl font-semibold tracking-tight text-grafite-900 flex items-center gap-3">
-        <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-grafite-900 text-white text-xs font-bold tracking-widest">AP</span>
-        <span>Assunção <span class="text-brand-green font-normal">e</span> Pádua</span>
-        <span class="hidden font-normal text-grafite-600 sm:inline text-base">· Odontologia</span>
+      <a href="#" class="flex items-center gap-3 text-grafite-900 group" aria-label="Assunção e Pádua Odontologia - Início">
+        <Image
+          src={logoPretoImg}
+          alt="Logo Assunção e Pádua Odontologia"
+          class="h-9 w-auto object-contain shrink-0"
+          loading="eager"
+        />
+        <div class="flex flex-col sm:flex-row sm:items-baseline sm:gap-1.5">
+          <span class="text-lg sm:text-xl font-semibold tracking-tight leading-tight">
+            Assunção <span class="text-brand-green font-normal">e</span> Pádua
+          </span>
+          <span class="text-xs sm:text-base font-normal text-grafite-600 leading-tight">
+            Odontologia
+          </span>
+        </div>
       </a>
 
       <!-- Desktop Navigation Anchors -->
@@ -869,8 +881,24 @@ const btnGhost =
     <div class="mx-auto max-w-7xl px-6 py-16 sm:px-8">
       <div class="grid gap-10 text-base text-grafite-600 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <p class="font-semibold text-grafite-900">Assunção e Pádua Odontologia Ltda</p>
-          <p class="mt-3">CNPJ: 45.641.094/0001-16</p>
+          <div class="flex items-center gap-3 mb-4">
+            <Image
+              src={logoPretoImg}
+              alt="Logo Assunção e Pádua Odontologia"
+              class="h-10 w-auto object-contain shrink-0"
+              loading="lazy"
+            />
+            <div class="flex flex-col">
+              <span class="font-semibold text-grafite-900 text-base leading-tight">
+                Assunção <span class="text-brand-green font-normal">e</span> Pádua
+              </span>
+              <span class="text-xs text-grafite-600 font-medium">
+                Odontologia
+              </span>
+            </div>
+          </div>
+          <p class="text-sm text-grafite-600">Assunção e Pádua Odontologia Ltda</p>
+          <p class="mt-1 text-sm text-grafite-600">CNPJ: 45.641.094/0001-16</p>
         </div>
         <div>
           <p class="font-semibold text-grafite-900">Endereço</p>
